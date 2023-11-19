@@ -1,9 +1,10 @@
 package lucas.example.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import lucas.example.domain.Anime;
+import lucas.example.requests.AnimePostRequestBody;
+import lucas.example.requests.AnimePutRequestBody;
 import lucas.example.service.AnimeService;
 import lucas.example.util.DateUtil;
 import org.springframework.http.HttpStatus;
@@ -30,11 +31,11 @@ public class AnimeController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable long id) {
-        return ResponseEntity.ok(animeService.findById(id));
+        return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
     }
 
     @PostMapping
-    public ResponseEntity<Anime> saveAnime(@RequestBody Anime anime) {
+    public ResponseEntity<Anime> saveAnime(@RequestBody AnimePostRequestBody anime) {
         return new ResponseEntity<>(animeService.saveAnime(anime), HttpStatus.CREATED);
     }
 
@@ -45,8 +46,8 @@ public class AnimeController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replaceAnime(@RequestBody Anime anime) {
-        animeService.replaceAnime(anime);
+    public ResponseEntity<Void> replaceAnime(@RequestBody AnimePutRequestBody animePutRequestBody) {
+        animeService.replaceAnime(animePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
