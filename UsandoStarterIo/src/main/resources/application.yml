@@ -1,4 +1,3 @@
 server:
   error:
     include-stacktrace: on_param
-  port: 9080
