@@ -1,4 +1,5 @@
 package lucas.src.controller;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lucas.src.domain.Game;
@@ -7,6 +8,7 @@ import lucas.src.requests.GamePutRequestBody;
 import lucas.src.service.GameService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class GameController {
     }
 
     @PostMapping
-    public ResponseEntity<Game> save(@RequestBody GamePostRequestBody anime) {
+    public ResponseEntity<Game> save(@RequestBody @Valid GamePostRequestBody anime) {
         return ResponseEntity.ok(gameService.save(anime));
     }
 

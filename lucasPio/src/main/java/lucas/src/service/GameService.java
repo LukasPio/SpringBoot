@@ -8,6 +8,7 @@ import lucas.src.requests.GamePostRequestBody;
 import lucas.src.requests.GamePutRequestBody;
 import lucas.src.utils.Utils;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class GameService {
     }
 
     public Game save(GamePostRequestBody gamePostRequestBody) {
-        return gameRepository.save(GameMapper.INSTANCE.toGame(gamePostRequestBody));
+        return gameRepository.save(Game.builder().name(gamePostRequestBody.getName()).build());
     }
 
     public void delete(int id) {
