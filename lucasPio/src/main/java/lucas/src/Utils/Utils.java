@@ -1,15 +1,12 @@
 package lucas.src.utils;
 
 import lombok.AllArgsConstructor;
+import lucas.src.Exceptions.BadRequestException;
 import lucas.src.domain.Game;
 import lucas.src.repository.GameRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -22,7 +19,7 @@ public class Utils {
     public Game findGameOrThrowNotFound(int id, GameRepository gameRepository) {
         return gameRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anime Not Found"));
+                .orElseThrow(() -> new BadRequestException("Anime Not Found"));
     }
 
 }

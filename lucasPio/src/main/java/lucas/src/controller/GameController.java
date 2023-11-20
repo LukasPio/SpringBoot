@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping(path = "/games")
 public class GameController {
     private final GameService gameService;
 
@@ -27,7 +28,7 @@ public class GameController {
     }
 
     @GetMapping(path = "/find")
-    public ResponseEntity<List<Game>> findByName(@RequestParam(value = "name") String name) {
+    public ResponseEntity<List<Game>> findByName(@RequestParam String name) {
         return ResponseEntity.ok(gameService.findByName(name));
     }
 
