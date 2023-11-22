@@ -10,7 +10,6 @@ import lucas.src.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Pageable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -21,7 +20,6 @@ public class GameService {
     private final GameRepository gameRepository;
 
     public Page<Game> listAll(Pageable pageable) {
-        System.out.println("Get request: " + utils.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         return gameRepository.findAll(pageable);
     }
 
