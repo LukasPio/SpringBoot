@@ -6,10 +6,11 @@ import lucas.src.domain.Game;
 import lucas.src.requests.GamePostRequestBody;
 import lucas.src.requests.GamePutRequestBody;
 import lucas.src.service.GameService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
@@ -20,8 +21,8 @@ public class GameController {
     private final GameService gameService;
 
     @GetMapping
-    public ResponseEntity<List<Game>> listAll() {
-        return ResponseEntity.ok(gameService.listAll());
+    public ResponseEntity<Page<Game>> listAll(Pageable pageable) {
+        return ResponseEntity.ok(gameService.listAll(pageable));
     }
 
     @GetMapping(path = "/{id}")
